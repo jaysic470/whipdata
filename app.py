@@ -4,7 +4,7 @@ import plotly.express as px
 from plotly import graph_objects as go
 
 # Load the dataset
-vehicles_us = pd.read_csv(r'C:\Users\sicol\whipdata\whipdata_r\vehicles_us.csv')
+vehicles_us = pd.read_csv('vehicles_us.csv')
 
 # Display a sample of the dataset
 st.header("Sample of Vehicle Dataset")
