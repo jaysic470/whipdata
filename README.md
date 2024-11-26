@@ -23,14 +23,14 @@ Libraries used --
 How to Launch the Project Locally --
 
 1. Clone this repository:
-	git clone https://github.com/jaysic470/whipdata.git
-	cd ./whipdata_r
+	- git clone https://github.com/jaysic470/whipdata.git
+	- cd ./whipdata_r
 
 2. Install the required dependencies:
-	pip install -r requirements.txt
+	- pip install -r requirements.txt
 
 3. Run the Streamlit app:
-	streamlit run app.py
+	- streamlit run app.py
 
 4. Open the provided URL in your browser to access the app.
 
