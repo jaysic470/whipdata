@@ -3,12 +3,24 @@ import pandas as pd
 import plotly.express as px
 from plotly import graph_objects as go
 
+
+
 # Load the dataset
 vehicles_us = pd.read_csv('vehicles_us.csv')
+
+# Fill numeric columns with median values
+vehicles_us['model_year'] = vehicles_us['model_year'].fillna(vehicles_us['model_year'].median())
+vehicles_us['cylinders'] = vehicles_us['cylinders'].fillna(vehicles_us['cylinders'].median())
+vehicles_us['odometer'] = vehicles_us['odometer'].fillna(vehicles_us['odometer'].median())
+
+# Fill categorical columns with 'unknown' or 0
+vehicles_us['paint_color'] = vehicles_us['paint_color'].fillna('unknown')
+vehicles_us['is_4wd'] = vehicles_us['is_4wd'].fillna(0)
 
 # Display a sample of the dataset
 st.header("Sample of Vehicle Dataset")
 st.write(vehicles_us.sample(10))
+
 
 # Distribution of Odometer Readings Chart with Checkbox
 st.header("Distribution of Odometer Readings (Below 500K Miles)")
@@ -106,6 +118,8 @@ fig_odometer.add_trace(
 # Display the histogram
 st.plotly_chart(fig_odometer)
 
+
+
 # Chart: Distribution of Car Prices
 st.header("Distribution of Car Prices (Below $100K)")
 filtered_data_price = vehicles_us[vehicles_us['price'] < 100000]
@@ -124,6 +138,8 @@ fig_price.update_layout(
 )
 fig_price.update_traces(marker_color='blue', opacity=0.7)
 st.plotly_chart(fig_price)
+
+
 
 # Chart: Price vs Odometer by Condition
 st.header("Price vs Odometer by Condition")
@@ -146,6 +162,8 @@ fig_scatter.update_layout(
     template='plotly_white'
 )
 st.plotly_chart(fig_scatter)
+
+
 
 # Chart: Price vs Vehicle Year by Condition
 st.header("Price vs Vehicle Year by Condition")
