@@ -8,10 +8,19 @@ from plotly import graph_objects as go
 # Load the dataset
 vehicles_us = pd.read_csv('vehicles_us.csv')
 
-# Fill numeric columns with median values
-vehicles_us['model_year'] = vehicles_us['model_year'].fillna(vehicles_us['model_year'].median())
-vehicles_us['cylinders'] = vehicles_us['cylinders'].fillna(vehicles_us['cylinders'].median())
+# Fill missing model_year based on the median value for each model
+vehicles_us['model_year'] = vehicles_us['model_year'].fillna(
+vehicles_us.groupby('model')['model_year'].transform('median'))
+
+# Fill missing odometer based on the median value for each model
+vehicles_us['odometer'] = vehicles_us['odometer'].fillna(
+vehicles_us.groupby('model')['odometer'].transform('median'))
+# Fill remaining missing values in odometer with the overall median
 vehicles_us['odometer'] = vehicles_us['odometer'].fillna(vehicles_us['odometer'].median())
+
+# Fill missing cylinders based on the median value for each model
+vehicles_us['cylinders'] = vehicles_us['cylinders'].fillna(
+vehicles_us.groupby('model')['cylinders'].transform('median'))
 
 # Fill categorical columns with 'unknown' or 0
 vehicles_us['paint_color'] = vehicles_us['paint_color'].fillna('unknown')
